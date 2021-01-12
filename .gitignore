@@ -88,3 +88,6 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Docker
+/docker/database/data
