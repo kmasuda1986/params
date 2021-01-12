@@ -10,32 +10,29 @@ module.exports = {
         type: Sequelize.INTEGER.UNSIGNED,
         comment: 'PK'
       },
-      user_type_id: {
+      role_id: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER.UNSIGNED,
         references: {
-          model: 'user_types',
+          model: 'roles',
           key: 'id'
         },
-        onUpdate: 'cascade',
-        onDelete: 'cascade',
-        comment: 'ユーザータイプID'
+        comment: 'ロールID'
       },
       email: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(255),
         comment: 'メールアドレス'
       },
       password: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(255),
         comment: 'パスワード'
       },
-      date_of_withdrawal: {
-        allowNull: true,
-        type: Sequelize.DATEONLY,
-        defaultValue: null,
-        comment: '退会年月日'
+      last_logined_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        comment: '最終ログイン日時'
       },
       is_active: {
         allowNull: true,
@@ -43,25 +40,27 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         comment: '有効区分'
       },
-      is_delete: {
-        allowNull: false,
-        defaultValue: false,
-        type: Sequelize.BOOLEAN,
-        comment: '削除区分'
-      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         comment: '作成日時'
       },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
         comment: '更新日時'
+      },
+      deleted_at: {
+        allowNull: true,
+        type: Sequelize.DATE,
+        comment: '削除日時'
       }
+    }, {
+      tableName: 'ユーザー情報テーブル'
     })
   },
-
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('users')
   }
