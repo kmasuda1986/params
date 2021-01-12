@@ -1,5 +1,33 @@
 # params
 
+## How to
+
+```bash
+# CLIをインストール
+$ npm install -g sequelize-cli
+
+# テーブル作成
+$ npx sequelize-cli migration:generate --name Users
+
+# マイグレーション実行
+$ npx sequelize-cli db:migrate --env development
+
+# 一つ前に戻す
+$ npx sequelize-cli db:migrate:undo　--env development
+
+# ロールバック
+$ npx sequelize-cli db:migrate:undo:all --env development
+
+# Seederを作成
+$ npx sequelize-cli seed:generate --name users
+
+# Seederを実行
+$ npx sequelize-cli db:seed:all --env development
+
+# テーブルを削除して再度マイグレーション実行
+$ npx sequelize-cli db:migrate:undo:all --env development
+```
+
 ## Build Setup
 
 ```bash
