@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  # MySQL
+  db:
+    image: mysql:5.7
+    container_name: params_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: EncMrnky5tHP
+      MYSQL_DATABASE: params
+      MYSQL_USER: params_user
+      MYSQL_PASSWORD: EncMrnky5tHP
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8_general_ci --collation-server=utf8_general_ci
+    volumes:
+    - ./docker/database/data:/var/lib/mysql
+    - ./docker/database/my.cnf:/etc/mysql/conf.d/my.cnf
+    - ./docker/database/entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+    - 13306:3306
+    tty: true
+
+  # phpMyAdmin
+  phpmyadmin:
+    container_name: params_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+    - PMA_ARBITRARY=1
+    - PMA_HOSTS=params_mysql
+    - PMA_USER=params_user
+    - PMA_PASSWORD=EncMrnky5tHP
+    ports:
+    - 18080:80

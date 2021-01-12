@@ -1,10 +1,31 @@
 import colors from 'vuetify/es5/util/colors'
 
+require('dotenv').config()
+const {
+  DB_DIALECT,
+  DB_PORT,
+  DB_USERNAME,
+  DB_PASSWORD,
+  DB_MASTER_HOST,
+  DB_SLAVE_HOST
+} = process.env
+
 export default {
+  srcDir: 'src/',
+
+  env: {
+    DB_DIALECT,
+    DB_PORT,
+    DB_USERNAME,
+    DB_PASSWORD,
+    DB_MASTER_HOST,
+    DB_SLAVE_HOST
+  },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - params',
-    title: 'params',
+    titleTemplate: '%s - PARAMS',
+    title: 'PARAMS',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -34,6 +55,11 @@ export default {
     '@nuxtjs/vuetify'
   ],
 
+  // serverMiddleware
+  serverMiddleware: [
+    '~~/api/app.js'
+  ],
+
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -47,7 +73,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,

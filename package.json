@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "NUXT_HOST=0.0.0.0 NUXT_PORT=1000 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -12,8 +12,17 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
+    "body-parser": "^1.19.0",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6"
+    "date-utils": "^1.2.21",
+    "express-validator": "^6.9.1",
+    "helmet": "^4.3.1",
+    "log4js": "^6.3.0",
+    "mysql2": "^2.2.5",
+    "nuxt": "^2.14.6",
+    "passport": "^0.4.1",
+    "path": "^0.12.7",
+    "sequelize": "^6.3.5"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",
